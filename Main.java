@@ -161,11 +161,54 @@ public class Main {
                 }
 
                 public static int consecutiveLossDays(String comm) {
-                    return 1234;
+                    int commIndex= -1;
+                    for(int i= 0;i< COMMS; i++){
+                        if(commodities[i].equals(comm)){
+                            commIndex = i;
+                            break;
+                        }
+                    }
+                    if(commIndex == -1){
+                        return -1;
+                    }
+                    int longestLoss=0;
+                    int currentLoss =0;
+
+                    for(int m =0; m<MONTHS; m++){
+                        for(int d =0; d<DAYS; d++){
+                            if(profits[m][d][commIndex]<0){
+                                currentLoss++;
+                                if(currentLoss > longestLoss){
+                                    longestLoss = currentLoss;
+                                }
+                            }else{
+                                currentLoss =0;
+                            }
+                        }
+                    }
+                    return longestLoss;
                 }
 
                 public static int daysAboveThreshold(String comm, int threshold) {
-                    return 1234;
+                    int commIndex = -1;
+                    for(int i= 0; i<COMMS; i++){
+                        if(commodities[i].equals(comm)){
+                            commIndex =i;
+                            break;
+                        }
+                    }
+                    if(commIndex == -1){
+                        return -1;
+                    }
+                    int count =0;
+                    for(int m =0;m < MONTHS; m++){
+                        for(int d =0; d<DAYS; d++){
+                            if(profits[m][d][commIndex]> threshold){
+                                count++;
+                            }
+                        }
+                    }
+                    return count;
                 }
 
                 public static int biggestDailySwing(int month) {
@@ -185,5 +228,7 @@ public class Main {
                     System.out.println("Data loaded – ready for queries");
                 }
             }
+
+
 
 
