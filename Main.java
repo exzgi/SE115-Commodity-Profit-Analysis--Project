@@ -212,9 +212,30 @@ public class Main {
                 }
 
                 public static int biggestDailySwing(int month) {
-                    return 1234;
-                }
+                    if (month < 0 || month >= MONTHS) {
+                        return -99999;
+                    }
+                    int biggestDifference = 0;
+                    int[] dailyTotals = new int[DAYS];
+                    for (int d = 0; d < DAYS; d++) {
+                        int daySum = 0;
+                        for (int c = 0; c < COMMS; c++) {
+                            daySum += profits[month][d][c];
+                        }
+                        dailyTotals[d] = daySum;
+                    }
+                    for (int d = 0; d < DAYS - 1; d++) {
+                        int currentDiff = dailyTotals[d] - dailyTotals[d + 1];
 
+                        if (currentDiff < 0) {
+                            currentDiff = -currentDiff;
+                        }
+                        if (currentDiff > biggestDifference) {
+                            biggestDifference = currentDiff;
+                        }
+                    }
+                    return biggestDifference;
+                }
                 public static String compareTwoCommodities(String c1, String c2) {
                     return "DUMMY is better by 1234";
                 }
@@ -228,6 +249,7 @@ public class Main {
                     System.out.println("Data loaded – ready for queries");
                 }
             }
+
 
 
 
