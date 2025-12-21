@@ -237,7 +237,33 @@ public class Main {
                     return biggestDifference;
                 }
                 public static String compareTwoCommodities(String c1, String c2) {
-                    return "DUMMY is better by 1234";
+                    int index1 = -1;
+                    int index2 = -1;
+                    for(int i =0; i<COMMS; i++){
+                        if(commodities[i].equals(c1))
+                            index1 =i;
+                        if(commodities[i].equals(c2))
+                            index2 =i;
+                    }
+                    if(index1 == -1 || index2 == -1){
+                        return "INVALID_COMMODITY";
+                    }
+                    int total1 =0;
+                    int total2=0;
+
+                    for(int m =0; m<MONTHS; m++){
+                        for(int d=0;d<DAYS; d++){
+                            total1 += profits[m][d][index1];
+                            total2 += profits[m][d][index2];
+                        }
+                    }
+                    if(total1> total2){
+                        return c1+ " is better by " + (total1 - total2);
+                    }else if(total2 > total1){
+                        return c2 + " is better by " + (total2 - total1);
+                    }else {
+                        return "Equal";
+                    }
                 }
 
                 public static String bestWeekOfMonth(int month) {
